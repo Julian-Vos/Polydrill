@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://vehicle.png" type="Texture" id=1]
+[ext_resource path="res://Vehicle.gd" type="Script" id=2]
+[ext_resource path="res://soil.png" type="Texture" id=3]
+[ext_resource path="res://DestructiblePolygon2D.gd" type="Script" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment() {
+	float distance_to_center = sqrt(pow(SCREEN_UV.x - 0.5, 2) + pow(SCREEN_UV.y - 0.5, 2));
+	float cutoff = 1.0 - sqrt(0.5);
+	
+	COLOR = mix(texture(TEXTURE, UV), vec4(0.0, 0.0, 0.0, 1.0), max(distance_to_center - cutoff, 0.0) * 5.0);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="Minor" type="Node"]
+
+[node name="Vehicle" type="Sprite" parent="."]
+position = Vector2( 512, 300 )
+scale = Vector2( 2, 2 )
+z_index = 1
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="Vehicle"]
+current = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2( 512, 300 )
+script = ExtResource( 4 )
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+material = SubResource( 2 )
+texture = ExtResource( 3 )
+texture_scale = Vector2( 0.25, 0.25 )
+polygon = PoolVector2Array( -2048, -1200, 2048, -1200, 2048, 1200, -2048, 1200 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
