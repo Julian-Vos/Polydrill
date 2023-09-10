@@ -8,6 +8,17 @@
 [node name="Game" type="Node2D"]
 script = ExtResource( 2 )
 
+[node name="DestructiblePolygon2D" type="Node2D" parent="."]
+show_behind_parent = true
+position = Vector2( 512, 300 )
+script = ExtResource( 4 )
+collidable = true
+
+[node name="Polygon2D" type="Polygon2D" parent="DestructiblePolygon2D"]
+antialiased = true
+texture = ExtResource( 1 )
+polygon = PoolVector2Array( -462, -186, 462, -186, 462, 250, -462, 250 )
+
 [node name="Ball1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 256, 82 )
 __meta__ = {
@@ -25,15 +36,3 @@ position = Vector2( 768, 82 )
 __meta__ = {
 "_edit_group_": true
 }
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-show_behind_parent = true
-position = Vector2( 512, 300 )
-script = ExtResource( 4 )
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
-antialiased = true
-texture = ExtResource( 1 )
-polygon = PoolVector2Array( -462, -186, 462, -186, 462, 250, -462, 250 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]

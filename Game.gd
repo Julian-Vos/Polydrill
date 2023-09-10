@@ -21,9 +21,7 @@ func _unhandled_input(event):
 	update()
 	
 	if pressing:
-		for body in get_children():
-			if body is StaticBody2D:
-				body.destruct(Transform2D(0, event.position).xform(brush))
+		$DestructiblePolygon2D.destruct(Transform2D(0, event.position).xform(brush))
 
 func _draw():
 	var points = Transform2D(0, get_global_mouse_position()).xform(brush)
