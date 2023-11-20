@@ -21,7 +21,7 @@ func _unhandled_input(event):
 	update()
 	
 	if pressing:
-		$DestructiblePolygon2D.destruct(Transform2D(0, event.position).xform(brush))
+		$DestructiblePolygon2D.destruct(brush, event.position)
 
 func _draw():
 	var points = Transform2D(0, get_global_mouse_position()).xform(brush)

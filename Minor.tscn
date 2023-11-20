@@ -23,10 +23,10 @@ shader = SubResource( 1 )
 [node name="DestructiblePolygon2D" type="Node2D" parent="."]
 position = Vector2( 512, 300 )
 script = ExtResource( 4 )
-collidable = true
 
 [node name="Polygon2D" type="Polygon2D" parent="DestructiblePolygon2D"]
 material = SubResource( 2 )
+antialiased = true
 texture = ExtResource( 3 )
 texture_scale = Vector2( 0.25, 0.25 )
 polygon = PoolVector2Array( -2048, -1200, 2048, -1200, 2048, 1200, -2048, 1200 )
